@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crop Monitoring Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* Custom Styles */
+    .sidebar {
+      background-color: #3b7ddd;
+      color: #fff;
+      height: 100vh;
+    }
+    .sidebar a {
+      color: #fff;
+    }
+    .dashboard-content {
+      padding: 20px;
+    }
+    .card {
+      border-radius: 10px;
+    }
+    .card-header {
+      background-color: #3b7ddd;
+      color: white;
+    }
+    .chart-container {
+      position: relative;
+      height: 200px;
+    }
+  </style>
+</head>
+<body>
+<div class="d-flex">
+  <!-- Sidebar -->
+  <div class="sidebar p-3">
+    <h3>Dashboard</h3>
+    <ul class="nav flex-column">
+      <li class="nav-item"><a class="nav-link" href="http://localhost:63342/crop-monitoring-system-font-end/pages/feildForm.html?_ijt=9vabk6n797tgr8ft1v7tda6069&_ij_reload=RELOAD_ON_SAVE">Field</a></li>
+      <li class="nav-item"><a class="nav-link" href="#">Crop</a></li>
+      <li class="nav-item"><a class="nav-link" href="#">Staff</a></li>
+      <li class="nav-item"><a class="nav-link" href="#">Log Service</a></li>
+      <li class="nav-item"><a class="nav-link" href="#">Vehicle</a></li>
+      <li class="nav-item"><a class="nav-link" href="#">Equipment</a></li>
+      <li class="nav-item"><a class="nav-link" href="#">User</a></li>
+    </ul>
+  </div>
+
+  <!-- Main Content -->
+  <div class="dashboard-content container-fluid">
+    <div class="row mb-4">
+      <div class="col-lg-4">
+        <!-- Productivity Card -->
+        <div class="card">
+          <div class="card-header">Productivity</div>
+          <div class="card-body">
+            <div class="chart-container">
+              <canvas id="productivityChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <!-- Quality Card -->
+        <div class="card">
+          <div class="card-header">Quality</div>
+          <div class="card-body">
+            <div class="chart-container">
+              <canvas id="qualityChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <!-- Efficiency Card -->
+        <div class="card">
+          <div class="card-header">Efficiency</div>
+          <div class="card-body">
+            <div class="chart-container">
+              <canvas id="efficiencyChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Overview and Prediction -->
+    <div class="row">
+      <div class="col-lg-6">
+        <!-- Overview of Plant -->
+        <div class="card mb-4">
+          <div class="card-header">Overview of Plant</div>
+          <div class="card-body">
+            <table class="table table-striped">
+              <thead>
+              <tr>
+                <th>Plant Location</th>
+                <th>Productivity</th>
+                <th>Alerts</th>
+                <th>Efficiency</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>Location 1</td>
+                <td>12 T +30%</td>
+                <td>25 Alerts</td>
+                <td>99.5%</td>
+              </tr>
+              <tr>
+                <td>Location 2</td>
+                <td>10 T +15%</td>
+                <td>15 Alerts</td>
+                <td>89.3%</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <!-- Prediction Card -->
+        <div class="card">
+          <div class="card-header">Prediction</div>
+          <div class="card-body">
+            <div class="chart-container">
+              <canvas id="predictionChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  // Initialize charts with sample data
+  const ctxProductivity = document.getElementById('productivityChart').getContext('2d');
+  new Chart(ctxProductivity, {
+    type: 'line',
+    data: {
+      labels: Array.from({length: 30}, (_, i) => i + 1),
+      datasets: [{
+        label: 'Productivity',
+        data: Array.from({length: 30}, () => Math.floor(Math.random() * 50) + 10),
+        borderColor: '#3b7ddd',
+        fill: false,
+      }]
+    }
+  });
+
+  const ctxQuality = document.getElementById('qualityChart').getContext('2d');
+  new Chart(ctxQuality, {
+    type: 'doughnut',
+    data: {
+      labels: ['High', 'Medium', 'Low'],
+      datasets: [{
+        data: [25, 40, 35],
+        backgroundColor: ['#28a745', '#ffc107', '#dc3545']
+      }]
+    }
+  });
+
+  const ctxEfficiency = document.getElementById('efficiencyChart').getContext('2d');
+  new Chart(ctxEfficiency, {
+    type: 'gauge',  // Note: Chart.js does not support gauge natively; replace with alternatives
+    data: {
+      labels: ['Low', 'Medium', 'High'],
+      datasets: [{
+        data: [10, 20, 70],
+        backgroundColor: ['#dc3545', '#ffc107', '#28a745']
+      }]
+    }
+  });
+
+  const ctxPrediction = document.getElementById('predictionChart').getContext('2d');
+  new Chart(ctxPrediction, {
+    type: 'line',
+    data: {
+      labels: Array.from({length: 30}, (_, i) => i + 1),
+      datasets: [{
+        label: 'Prediction',
+        data: Array.from({length: 30}, () => Math.floor(Math.random() * 20) + 10),
+        borderColor: '#6610f2',
+        fill: false,
+      }]
+    }
+  });
+</script>
+</body>
+</html>
