@@ -1,0 +1,36 @@
+.container-fluid {
+    background: linear-gradient(to bottom, #89bfff, #f1f8ff);
+}
+
+#signInButton, #signInButton2 {
+    color: #fff;
+    background-color: #3b7ddd;
+    border-color: #3b7ddd;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+#signInButton:hover, #signInButton2:hover {
+    background-color: #2a5fbf;
+    border-color: #2a5fbf;
+}
+
+#registerButton {
+    color: #3b7ddd;
+    background-color: #fff;
+    border-color: #3b7ddd;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#registerButton:hover {
+    background-color: #3b7ddd;
+    color: #fff;
+    border-color: #3b7ddd;
+}
+
+#companyName {
+    color: #3b7ddd;
+}
+
+.img-fluid {
+    max-height: 250px;
+}
