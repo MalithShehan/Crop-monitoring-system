@@ -3,6 +3,7 @@ package lk.ijse.greenshadowbackend.service.impl;
 import lk.ijse.greenshadowbackend.Repository.StaffRepository;
 import lk.ijse.greenshadowbackend.Repository.VehicleRepository;
 import lk.ijse.greenshadowbackend.customObj.VehicleResponse;
+
 import lk.ijse.greenshadowbackend.customObj.errorRespose.VehicleErrorResponse;
 import lk.ijse.greenshadowbackend.dto.impl.VehicleDTO;
 import lk.ijse.greenshadowbackend.entity.Staff;
@@ -79,7 +80,7 @@ public class VehicleBoIMPL implements VehicleBo {
         if (byId.isPresent()){
             return mapping.convertVehicleToVehicleDTO(byId.get());
         }else {
-            return new  VehicleErrorResponse(404 , "vehicle not found");
+            return new VehicleErrorResponse(404 , "vehicle not found");
         }
     }
 
